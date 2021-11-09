@@ -8,29 +8,34 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Room {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	UUID id;
+	private UUID id;
 	@Column(nullable = false)
-	String title;
+	private String title;
 	@Column(nullable = false)
-	String description;
+	private String description;
+	
+	@ManyToOne
+    @JoinColumn(name = "host_id")
+    private Host host;
+	
 	@Column(nullable = false)
-	String hostName;
-	@Column(nullable = false)
-	BigDecimal price;
+	private BigDecimal price;
 
 	public Room() {
 
 	}
 
-	public Room(String title, String description, String hostName, BigDecimal price) {
+	public Room(String title, String description, Host host, BigDecimal price) {
 		this.title = title;
 		this.description = description;
-		this.hostName = hostName;
+		this.host = host;
 		this.price = price;
 	}
 
@@ -50,12 +55,12 @@ public class Room {
 		this.description = description;
 	}
 
-	public String getHostName() {
-		return hostName;
+	public Host getHost() {
+		return host;
 	}
 
-	public void setHostName(String hostName) {
-		this.hostName = hostName;
+	public void setHost(Host host) {
+		this.host = host;
 	}
 
 	public BigDecimal getPrice() {
