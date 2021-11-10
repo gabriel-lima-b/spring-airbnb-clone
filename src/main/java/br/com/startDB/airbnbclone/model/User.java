@@ -6,9 +6,10 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 
-
-public class User {
+@MappedSuperclass
+public abstract class  User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	UUID Id;
