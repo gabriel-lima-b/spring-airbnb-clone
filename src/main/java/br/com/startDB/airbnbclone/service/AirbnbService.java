@@ -20,7 +20,7 @@ public interface AirbnbService {
 	void saveHost(Host host) throws DataAccessException;
 	void deleteHost(Host host) throws DataAccessException;
 
-	Room findPetById(UUID id) throws DataAccessException;
+	Room findRoomById(UUID id) throws DataAccessException;
 	Iterable<Room> findAllRooms() throws DataAccessException;
 	void saveRoom(Room room) throws DataAccessException;
 	void deleteRoom(Room room) throws DataAccessException;	

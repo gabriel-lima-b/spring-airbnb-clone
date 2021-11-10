@@ -78,7 +78,7 @@ public class AirbnbServiceImpl implements AirbnbService {
 	}
 
 	@Override
-	public Room findPetById(UUID id) throws DataAccessException {
+	public Room findRoomById(UUID id) throws DataAccessException {
 		Optional<Room> room = roomRepository.findById(id);
 		if (room.isEmpty()) {
 			return null;

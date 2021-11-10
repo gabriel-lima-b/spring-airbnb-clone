@@ -14,4 +14,8 @@ public class Host extends User{
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "host", fetch = FetchType.EAGER)
     private Set<Room> rooms;
 
+	public Set<Room> getRooms() {
+		return rooms;
+	}
+
 }

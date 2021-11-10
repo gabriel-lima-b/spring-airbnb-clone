@@ -32,9 +32,11 @@ public class JacksonCustomHostDeserializer extends StdDeserializer<Host> {
 		String email = node.get("email").asText(null);
 		String password = node.get("password").asText(null);
 		String phone = node.get("phone").asText(null);
+		
 		if (node.hasNonNull("id")) {
 			host.setId(UUID.fromString(node.get("id").asText(null)));
 		}
+		
         host.setName(name);
         host.setLastName(lastName);
         host.setEmail(email);
