@@ -34,9 +34,20 @@ public class Host extends User{
 		this.rooms = new HashSet<Room>();
 	}
 
-	
+	public Set<Room> getRooms() {
+		return rooms;
+	}
 
 	public void setRooms(Set<Room> rooms) {
 		this.rooms = rooms;
 	}
+
+	public void addRoom(Room room) {
+		this.rooms.add(room);
+	}
+	
+	public boolean removeRoom (Room room) {
+		return this.rooms.remove(room);
+	}
+	
 }
