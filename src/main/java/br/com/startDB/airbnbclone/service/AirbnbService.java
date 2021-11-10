@@ -1,6 +1,5 @@
 package br.com.startDB.airbnbclone.service;
 
-import java.util.Collection;
 import java.util.UUID;
 
 import org.springframework.dao.DataAccessException;
@@ -24,9 +23,7 @@ public interface AirbnbService {
 	Room findPetById(UUID id) throws DataAccessException;
 	Iterable<Room> findAllRooms() throws DataAccessException;
 	void saveRoom(Room room) throws DataAccessException;
-	void deleteRoom(Room room) throws DataAccessException;
-
-	
+	void deleteRoom(Room room) throws DataAccessException;	
 	
 
 }
