@@ -40,8 +40,6 @@ public class RoomController {
 			}
 			return new ResponseEntity<Collection<Room>>(rooms, HttpStatus.OK);
 		}
-		
-
 	}
 
 
