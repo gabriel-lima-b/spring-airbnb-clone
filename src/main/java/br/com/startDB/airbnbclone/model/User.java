@@ -12,7 +12,7 @@ import javax.persistence.MappedSuperclass;
 public abstract class  User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	UUID Id;
+	UUID id;
 	
 	@Column(nullable = false)
 	String email;
@@ -82,7 +82,11 @@ public abstract class  User {
 	}
 
 	public UUID getId() {
-		return Id;
+		return id;
+	}
+	
+	public void setId(UUID id) {
+		this.id = id;
 	}
 
 	
