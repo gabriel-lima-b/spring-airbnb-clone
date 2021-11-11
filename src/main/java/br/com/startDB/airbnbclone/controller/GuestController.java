@@ -7,13 +7,16 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.startDB.airbnbclone.model.Guest;
+import br.com.startDB.airbnbclone.model.Room;
 import br.com.startDB.airbnbclone.service.AirbnbService;
 
 @RestController
@@ -40,6 +43,15 @@ public class GuestController {
 			return new ResponseEntity<Collection<Guest>>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<Collection<Guest>>(guests, HttpStatus.OK);
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
+	public ResponseEntity<Guest> save(@RequestBody Guest guest, BindingResult bindingResult) {
+		if(bindingResult.hasErrors() || (guest == null)){
+			return new ResponseEntity<Guest>(guest, HttpStatus.BAD_REQUEST);
+		}
+		airbnbService.saveGuest(guest);
+		return new ResponseEntity<Guest>(guest, HttpStatus.CREATED); 
 	}
 	
 

@@ -8,8 +8,10 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 
+import br.com.startDB.airbnbclone.model.Host;
 //import br.com.startDB.airbnbclone.model.Host;
 import br.com.startDB.airbnbclone.model.Room;
 
@@ -27,10 +29,16 @@ public class JacksonCustomRoomDeserializer extends StdDeserializer<Room>{
 	public Room deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
 		JsonNode node = parser.getCodec().readTree(parser);
 		Room room = new Room();
+		Host host = new Host();
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode host_node = node.get("host");
+		
+		host = mapper.treeToValue(host_node, Host.class);
+		
+		
 		String title = node.get("title").asText(null);
 		String description = node.get("description").asText(null);
 		String city = node.get("city").asText(null);
-
 		BigDecimal price = new BigDecimal(node.get("price").asText(null));
 		
 		if (node.hasNonNull("id")) {
@@ -41,6 +49,7 @@ public class JacksonCustomRoomDeserializer extends StdDeserializer<Room>{
         room.setDescription(description);
         room.setPrice(price);
         room.setCity(city);
+        room.setHost(host);
 		return room;
 	}
 }

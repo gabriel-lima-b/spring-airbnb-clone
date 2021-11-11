@@ -27,6 +27,7 @@ public class Host extends User{
 	
 	public Host() {
 		super();
+		this.rooms = new HashSet<>();
 	}
 
 	public Host(String email, String password, String name, String lastName, String phone) {

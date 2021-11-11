@@ -3,6 +3,8 @@ package br.com.startDB.airbnbclone.service;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -97,6 +99,7 @@ public class AirbnbServiceImpl implements AirbnbService {
 	}
 
 	@Override
+	@Transactional
 	public void saveRoom(Room room) throws DataAccessException {
 		roomRepository.save(room);
 	}
