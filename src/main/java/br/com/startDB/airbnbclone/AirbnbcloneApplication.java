@@ -28,6 +28,9 @@ public class AirbnbcloneApplication {
 	      Room r1 = new Room( "casa", "casa bonita e azul", h1, new BigDecimal("231"), "London");
 	      airbnbService.saveRoom(r1);
 	      h1.addRoom(r1);
+	      Room r2 = new Room( "casa2", "casa bonita e amarela", h1, new BigDecimal("235"), "Cambridge");
+	      airbnbService.saveRoom(r2);
+	      h1.addRoom(r2);
 	      
 	      airbnbService.saveGuest(new Guest("guestmail@mail.com","senha","Guest","Exemplo","telefone do guest"));
 	    };

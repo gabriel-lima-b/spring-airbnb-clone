@@ -85,6 +85,11 @@ public class AirbnbServiceImpl implements AirbnbService {
 		}
 		return room.get();
 	}
+	
+	@Override
+	public Iterable<Room> findAllRoomsByCity(String city) throws DataAccessException {
+		return roomRepository.findAllByCity(city);
+	}
 
 	@Override
 	public Iterable<Room> findAllRooms() throws DataAccessException {

@@ -42,6 +42,16 @@ public class RoomController {
 			}
 			return new ResponseEntity<Collection<Room>>(rooms, HttpStatus.OK);
 		}
+		
+		@RequestMapping(value = "/city/{city}", method = RequestMethod.GET, produces = "application/json")
+		public ResponseEntity<Collection<Room>> getRoomsByCity(@PathVariable("city") String city){
+			List<Room> rooms = (List<Room>)this.airbnbService.findAllRoomsByCity(city);
+			if(rooms.isEmpty()){
+				return new ResponseEntity<Collection<Room>>(HttpStatus.NOT_FOUND);
+			}
+			return new ResponseEntity<Collection<Room>>(rooms, HttpStatus.OK);
+		}
+		
 	}
 
 
