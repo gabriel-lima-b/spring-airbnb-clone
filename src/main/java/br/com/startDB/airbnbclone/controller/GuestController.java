@@ -4,9 +4,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.startDB.airbnbclone.model.Guest;
-import br.com.startDB.airbnbclone.model.Room;
+
 import br.com.startDB.airbnbclone.service.AirbnbService;
 
 @RestController
@@ -64,6 +67,24 @@ public class GuestController {
 		return new ResponseEntity<Guest>(guest, HttpStatus.OK);	
 	}
 	
+	@RequestMapping(value = "/{guestId}", method = RequestMethod.PUT, produces = "application/json")
+	public ResponseEntity<Guest> updateGuest(@PathVariable("guestId") UUID guestId, @RequestBody Guest guest, BindingResult bindingResult){
+		if(bindingResult.hasErrors() || (guest == null)){
+			return new ResponseEntity<Guest>(guest, HttpStatus.BAD_REQUEST);
+		}
+		Guest currentGuest = this.airbnbService.findGuestById(guestId);
+		if(currentGuest == null){
+			return new ResponseEntity<Guest>(HttpStatus.NOT_FOUND);
+		}
+		currentGuest.setName(guest.getName());
+		currentGuest.setLastName(guest.getLastName());
+		currentGuest.setEmail(guest.getEmail());
+		currentGuest.setPassword(guest.getPassword());
+		currentGuest.setPhone(guest.getPhone());
+		
+		this.airbnbService.saveGuest(currentGuest);
+		return new ResponseEntity<Guest>(currentGuest, HttpStatus.NO_CONTENT);
+	}
 	
 
 }
