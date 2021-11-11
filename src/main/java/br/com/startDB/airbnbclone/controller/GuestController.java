@@ -54,5 +54,16 @@ public class GuestController {
 		return new ResponseEntity<Guest>(guest, HttpStatus.CREATED); 
 	}
 	
+	@RequestMapping(value = "/{guestId}", method = RequestMethod.DELETE, produces = "application/json")
+	public ResponseEntity<Guest> deleteById(@PathVariable("guestId") UUID guestId) {			
+		Guest guest = this.airbnbService.findGuestById(guestId);		
+		airbnbService.deleteGuest(guest);	
+		if (guest == null) {
+			return new ResponseEntity<Guest>(guest, HttpStatus.NOT_FOUND);
+		}		
+		return new ResponseEntity<Guest>(guest, HttpStatus.OK);	
+	}
+	
+	
 
 }
