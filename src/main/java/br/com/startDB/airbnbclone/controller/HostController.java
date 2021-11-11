@@ -63,6 +63,25 @@ public class HostController {
 		}		
 		return new ResponseEntity<Host>(host, HttpStatus.OK);	
 	}
+	
+	@RequestMapping(value = "/{hostId}", method = RequestMethod.PUT, produces = "application/json")
+	public ResponseEntity<Host> updateHost(@PathVariable("hostId") UUID hostId, @RequestBody Host host, BindingResult bindingResult){
+		if(bindingResult.hasErrors() || (host == null)){
+			return new ResponseEntity<Host>(host, HttpStatus.BAD_REQUEST);
+		}
+		Host currentHost = this.airbnbService.findHostById(hostId);
+		if(currentHost == null){
+			return new ResponseEntity<Host>(HttpStatus.NOT_FOUND);
+		}
+		currentHost.setName(host.getName());
+		currentHost.setLastName(host.getLastName());
+		currentHost.setEmail(host.getEmail());
+		currentHost.setPassword(host.getPassword());
+		currentHost.setPhone(host.getPhone());		
+		
+		this.airbnbService.saveHost(currentHost);
+		return new ResponseEntity<Host>(currentHost, HttpStatus.NO_CONTENT);
+	}
 }
 	
 	

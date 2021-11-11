@@ -60,6 +60,7 @@ public class RoomController {
 		if (bindingResult.hasErrors() || (room == null)) {
 			return new ResponseEntity<Room>(room, HttpStatus.BAD_REQUEST);
 		}
+	
 		airbnbService.saveRoom(room);
 		return new ResponseEntity<Room>(room, HttpStatus.CREATED);
 	}
