@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.startDB.airbnbclone.model.Host;
 import br.com.startDB.airbnbclone.model.Room;
 import br.com.startDB.airbnbclone.service.AirbnbService;
 
@@ -74,6 +75,24 @@ public class RoomController {
 		room.getHost().removeRoom(room);
 		airbnbService.deleteRoom(room);
 		return new ResponseEntity<Room>(room, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/{roomId}", method = RequestMethod.PUT, produces = "application/json")
+	public ResponseEntity<Room> updateRoom(@PathVariable("roomId") UUID roomId, @RequestBody Room room, BindingResult bindingResult){
+		if(bindingResult.hasErrors() || (room == null)){
+			return new ResponseEntity<Room>(room, HttpStatus.BAD_REQUEST);
+		}
+		Room currentRoom = this.airbnbService.findRoomById(roomId);
+		if(currentRoom == null){
+			return new ResponseEntity<Room>(HttpStatus.NOT_FOUND);
+		}
+		currentRoom.setTitle(room.getTitle());
+		currentRoom.setDescription(room.getDescription());
+		currentRoom.setCity(room.getCity());
+		currentRoom.setPrice(room.getPrice());
+				
+		this.airbnbService.saveRoom(currentRoom);
+		return new ResponseEntity<Room>(currentRoom, HttpStatus.NO_CONTENT);
 	}
 
 }
