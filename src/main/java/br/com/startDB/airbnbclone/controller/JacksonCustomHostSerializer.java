@@ -34,9 +34,10 @@ public class JacksonCustomHostSerializer extends StdSerializer<Host> {
 		jgen.writeStringField("email" , host.getEmail());
 		jgen.writeStringField("password" , host.getPassword());
 		jgen.writeStringField("phone" , host.getPhone());
-		
+		//write rooms array
 		jgen.writeArrayFieldStart("rooms");
 		for (Room room : host.getRooms()) {
+			jgen.writeStartObject(); // room
 			if (room.getId() == null) {
 				jgen.writeNullField("id");
 			} else {
@@ -47,7 +48,7 @@ public class JacksonCustomHostSerializer extends StdSerializer<Host> {
 			if (room.getHost().getId() == null) {
 				jgen.writeNullField("id");
 			} else {
-				jgen.writeStringField("id", room.getHost().getId().toString());
+				jgen.writeStringField("host", room.getHost().getId().toString());
 			}
 			jgen.writeNumberField("price", room.getPrice());
 			jgen.writeEndObject(); // room

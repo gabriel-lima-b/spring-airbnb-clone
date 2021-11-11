@@ -11,6 +11,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import br.com.startDB.airbnbclone.controller.JacksonCustomHostDeserializer;
+import br.com.startDB.airbnbclone.controller.JacksonCustomHostSerializer;
+import br.com.startDB.airbnbclone.controller.JacksonCustomRoomDeserializer;
+import br.com.startDB.airbnbclone.controller.JacksonCustomRoomSerializer;
+
+@JsonSerialize(using = JacksonCustomRoomSerializer.class)
+@JsonDeserialize(using = JacksonCustomRoomDeserializer.class)
 @Entity
 public class Room {
 	@Id
@@ -74,5 +84,11 @@ public class Room {
 	public UUID getId() {
 		return id;
 	}
+
+	public void setId(UUID id) {
+		this.id = id;
+	}
+	
+
 
 }
