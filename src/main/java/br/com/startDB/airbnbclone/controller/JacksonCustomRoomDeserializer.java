@@ -29,6 +29,7 @@ public class JacksonCustomRoomDeserializer extends StdDeserializer<Room>{
 		Room room = new Room();
 		String title = node.get("title").asText(null);
 		String description = node.get("description").asText(null);
+		String city = node.get("city").asText(null);
 
 		BigDecimal price = new BigDecimal(node.get("price").asText(null));
 		
@@ -39,6 +40,7 @@ public class JacksonCustomRoomDeserializer extends StdDeserializer<Room>{
         room.setTitle(title);
         room.setDescription(description);
         room.setPrice(price);
+        room.setCity(city);
 		return room;
 	}
 }
