@@ -25,7 +25,7 @@ public class AirbnbcloneApplication {
 	    	Host h1 = new Host( "exemplo@gmail.com", "senha","nome","sobrenome", "telefone");
 	      airbnbService.saveHost(h1);
 	      
-	      Room r1 = new Room( "casa", "casa bonita e azul", h1, new BigDecimal("231"));
+	      Room r1 = new Room( "casa", "casa bonita e azul", h1, new BigDecimal("231"), "London");
 	      airbnbService.saveRoom(r1);
 	      h1.addRoom(r1);
 	      

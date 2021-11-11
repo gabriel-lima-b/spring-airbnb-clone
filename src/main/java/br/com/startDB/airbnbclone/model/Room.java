@@ -30,11 +30,13 @@ public class Room {
 	private String title;
 	@Column(nullable = false)
 	private String description;
-	
+	@Column(nullable = false)
+	private String city;
+
 	@ManyToOne
-    @JoinColumn(name = "host_id")
-    private Host host;
-	
+	@JoinColumn(name = "host_id")
+	private Host host;
+
 	@Column(nullable = false)
 	private BigDecimal price;
 
@@ -42,11 +44,12 @@ public class Room {
 
 	}
 
-	public Room(String title, String description, Host host, BigDecimal price) {
+	public Room(String title, String description, Host host, BigDecimal price, String city) {
 		this.title = title;
 		this.description = description;
 		this.host = host;
 		this.price = price;
+		this.city = city;
 	}
 
 	public String getTitle() {
@@ -88,7 +91,14 @@ public class Room {
 	public void setId(UUID id) {
 		this.id = id;
 	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
 	
-
-
 }
