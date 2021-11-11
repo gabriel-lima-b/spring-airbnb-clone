@@ -53,6 +53,16 @@ public class HostController {
 		airbnbService.saveHost(host);
 		return new ResponseEntity<Host>(host, HttpStatus.CREATED); 
 	}
+	
+	@RequestMapping(value = "/{hostId}", method = RequestMethod.DELETE, produces = "application/json")
+	public ResponseEntity<Host> deleteById(@PathVariable("hostId") UUID hostId) {			
+		Host host = this.airbnbService.findHostById(hostId);		
+		airbnbService.deleteHost(host);	
+		if (host == null) {
+			return new ResponseEntity<Host>(host, HttpStatus.NOT_FOUND);
+		}		
+		return new ResponseEntity<Host>(host, HttpStatus.OK);	
+	}
 }
 	
 	
