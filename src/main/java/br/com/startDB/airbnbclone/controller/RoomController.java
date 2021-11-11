@@ -4,8 +4,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.startDB.airbnbclone.model.Host;
 import br.com.startDB.airbnbclone.model.Room;
 import br.com.startDB.airbnbclone.service.AirbnbService;
 

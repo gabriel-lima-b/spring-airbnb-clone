@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.startDB.airbnbclone.model.Guest;
 import br.com.startDB.airbnbclone.model.Host;
 import br.com.startDB.airbnbclone.service.AirbnbService;
 

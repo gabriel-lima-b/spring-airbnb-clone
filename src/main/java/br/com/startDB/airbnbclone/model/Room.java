@@ -14,8 +14,6 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import br.com.startDB.airbnbclone.controller.JacksonCustomHostDeserializer;
-import br.com.startDB.airbnbclone.controller.JacksonCustomHostSerializer;
 import br.com.startDB.airbnbclone.controller.JacksonCustomRoomDeserializer;
 import br.com.startDB.airbnbclone.controller.JacksonCustomRoomSerializer;
 
