@@ -1,4 +1,3 @@
-
 package br.com.startDB.airbnbclone.controller;
 
 import java.io.IOException;
