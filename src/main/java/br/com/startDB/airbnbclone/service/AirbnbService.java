@@ -6,6 +6,7 @@ import org.springframework.dao.DataAccessException;
 
 import br.com.startDB.airbnbclone.model.Guest;
 import br.com.startDB.airbnbclone.model.Host;
+import br.com.startDB.airbnbclone.model.Reserve;
 import br.com.startDB.airbnbclone.model.Room;
 
 public interface AirbnbService {
@@ -25,6 +26,11 @@ public interface AirbnbService {
 	Iterable<Room> findAllRooms() throws DataAccessException;
 	void saveRoom(Room room) throws DataAccessException;
 	void deleteRoom(Room room) throws DataAccessException;	
+	
+	Reserve findReserveById(UUID id) throws DataAccessException;
+	Iterable<Reserve> findAllReserves() throws DataAccessException;
+	void saveReserve(Reserve reserve) throws DataAccessException;
+	void deleteReserve(Reserve reserve) throws DataAccessException;
 	
 
 }

@@ -11,9 +11,11 @@ import org.springframework.stereotype.Service;
 
 import br.com.startDB.airbnbclone.model.Guest;
 import br.com.startDB.airbnbclone.model.Host;
+import br.com.startDB.airbnbclone.model.Reserve;
 import br.com.startDB.airbnbclone.model.Room;
 import br.com.startDB.airbnbclone.repository.GuestRepository;
 import br.com.startDB.airbnbclone.repository.HostRepository;
+import br.com.startDB.airbnbclone.repository.ReserveRepository;
 import br.com.startDB.airbnbclone.repository.RoomRepository;
 
 @Service
@@ -22,13 +24,15 @@ public class AirbnbServiceImpl implements AirbnbService {
 	private GuestRepository guestRepository;
 	private HostRepository hostRepository;
 	private RoomRepository roomRepository;
+	private ReserveRepository reserveRepository;
 
 	@Autowired
 	public AirbnbServiceImpl(GuestRepository guestRepository, HostRepository hostRepository,
-			RoomRepository roomRepository) {
+			RoomRepository roomRepository, ReserveRepository reserveRepository) {
 		this.guestRepository = guestRepository;
 		this.hostRepository = hostRepository;
 		this.roomRepository = roomRepository;
+		this.reserveRepository = reserveRepository;
 	}
 
 	@Override
@@ -107,6 +111,30 @@ public class AirbnbServiceImpl implements AirbnbService {
 	@Override
 	public void deleteRoom(Room room) throws DataAccessException {
 		roomRepository.delete(room);
+	}
+
+	@Override
+	public Reserve findReserveById(UUID id) throws DataAccessException {
+		Optional<Reserve> reserve = reserveRepository.findById(id);
+		if (reserve.isEmpty()) {
+			return null;
+		}
+		return reserve.get();
+	}
+
+	@Override
+	public Iterable<Reserve> findAllReserves() throws DataAccessException {
+		return reserveRepository.findAll();
+	}
+
+	@Override
+	public void saveReserve(Reserve reserve) throws DataAccessException {
+		reserveRepository.save(reserve);
+	}
+
+	@Override
+	public void deleteReserve(Reserve reserve) throws DataAccessException {
+		reserveRepository.delete(reserve);		
 	}
 
 }
