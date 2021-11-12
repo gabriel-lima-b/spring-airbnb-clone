@@ -36,6 +36,8 @@ public class JacksonCustomRoomSerializer extends StdSerializer<Room> {
 			jgen.writeStringField("id", room.getHost().getId().toString());
 			jgen.writeStringField( "name", room.getHost().getName());
 			jgen.writeStringField( "lastName", room.getHost().getLastName());
+			jgen.writeStringField("email" , room.getHost().getEmail());
+			jgen.writeStringField("phone" , room.getHost().getPhone());
 			jgen.writeEndObject();
 		}
 		jgen.writeNumberField("price", room.getPrice());
