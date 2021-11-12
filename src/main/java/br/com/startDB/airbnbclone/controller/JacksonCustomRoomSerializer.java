@@ -29,10 +29,10 @@ public class JacksonCustomRoomSerializer extends StdSerializer<Room> {
 		jgen.writeStringField("title", room.getTitle());
 		jgen.writeStringField("description", room.getDescription());
 
+		jgen.writeObjectFieldStart("host");
 		if (room.getHost().getId() == null) {
-			jgen.writeNullField("host");
+			jgen.writeNullField("id");
 		} else {
-			jgen.writeObjectFieldStart("host");
 			jgen.writeStringField("id", room.getHost().getId().toString());
 			jgen.writeStringField( "name", room.getHost().getName());
 			jgen.writeStringField( "lastName", room.getHost().getLastName());
