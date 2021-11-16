@@ -45,6 +45,7 @@ public class JacksonCustomHostSerializer extends StdSerializer<Host> {
 			}
 			jgen.writeStringField( "title", room.getTitle());
 			jgen.writeStringField( "description", room.getDescription());
+			jgen.writeStringField( "city", room.getCity());
 			if (room.getHost().getId() == null) {
 				jgen.writeNullField("id");
 			} else {

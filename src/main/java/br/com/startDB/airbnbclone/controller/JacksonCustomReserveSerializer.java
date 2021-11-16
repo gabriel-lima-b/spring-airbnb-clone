@@ -46,7 +46,7 @@ public class JacksonCustomReserveSerializer extends StdSerializer<Reserve> {
 			jgen.writeNullField("id");
 		} else {
 			jgen.writeStringField("id", reserve.getId().toString());
-			jgen.writeStringField("papagaio" , reserve.getGuest().getName());
+			jgen.writeStringField("name" , reserve.getGuest().getName());
 			jgen.writeStringField("lastName" , reserve.getGuest().getLastName());
 			jgen.writeStringField("email" , reserve.getGuest().getEmail());
 			jgen.writeStringField("phone" , reserve.getGuest().getPhone());			

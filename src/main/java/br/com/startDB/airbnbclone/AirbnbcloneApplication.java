@@ -36,8 +36,7 @@ public class AirbnbcloneApplication {
 	    	Room r1 = new Room( "Casa", "Localizada na rua Emilio Bressan, a casa é espaçosa, bem iluminada "
 	    			+ "e confortável, passando uma sensação de familiaridade ", h1, new BigDecimal("123"), "Barra Bonita");
 	    	airbnbService.saveRoom(r1);
-	    
-	    	
+	    	    	
 	    	Room r2 = new Room( "Hotel", "Com quartos grande e equipados com tecnologia de ponta, nosso hotel"
 	    			+ " tem as melhores ofertas para você e sua família!", h2, new BigDecimal("180"), "São Paulo");
 	    	airbnbService.saveRoom(r2);
