@@ -1,5 +1,7 @@
 # spring-airbnb-clone
 
+[![Java CI with Maven](https://github.com/gabriel-lima-b/spring-airbnb-clone/actions/workflows/maven.yml/badge.svg)](https://github.com/gabriel-lima-b/spring-airbnb-clone/actions/workflows/maven.yml)
+
 This project is a challenge proposed by the StartDB Staff, we had a week to create an Airbnb clone using Java Spring and Angular. We worked using pair programming and we tried to aplly some agile concepts. This project utilizes our Angular Application as the front end. You can find it here: [airbnb-angular-application](https://github.com/felipebonadio/angular-airbnb-clone)
 
 See the issues to know our development process.
