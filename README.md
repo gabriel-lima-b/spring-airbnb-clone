@@ -8,6 +8,7 @@ See the issues to know our development process.
 
 ## URLS
 API Hosted at Heroku https://spring-airbnb-startdb.herokuapp.com/api/
+
 The base url of our api is http://localhost:8080/api/
 
 You can then request to these urls:
