@@ -38,14 +38,16 @@ public class JacksonCustomReserveSerializer extends StdSerializer<Reserve> {
 		if (reserve.getRoom().getId() == null) {
 			jgen.writeNullField("id");
 		} else {
-			jgen.writeStringField("id", reserve.getId().toString());
+			jgen.writeStringField("id", reserve.getRoom().getId().toString());
+			jgen.writeStringField("title",reserve.getRoom().getTitle());
+			jgen.writeNumberField("price", reserve.getRoom().getPrice());
 		}
 		jgen.writeEndObject(); // end room
 		jgen.writeObjectFieldStart("guest"); // start guest
 		if (reserve.getRoom().getId() == null) {
 			jgen.writeNullField("id");
 		} else {
-			jgen.writeStringField("id", reserve.getId().toString());
+			jgen.writeStringField("id", reserve.getGuest().getId().toString());
 			jgen.writeStringField("name" , reserve.getGuest().getName());
 			jgen.writeStringField("lastName" , reserve.getGuest().getLastName());
 			jgen.writeStringField("email" , reserve.getGuest().getEmail());

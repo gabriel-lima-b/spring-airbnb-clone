@@ -15,6 +15,13 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import br.com.startDB.airbnbclone.controller.JacksonCustomReserveDeserializer;
+import br.com.startDB.airbnbclone.controller.JacksonCustomReserveSerializer;
+@JsonSerialize(using = JacksonCustomReserveSerializer.class)
+@JsonDeserialize(using = JacksonCustomReserveDeserializer.class)
 @Entity
 public class Reserve {
 	@Id

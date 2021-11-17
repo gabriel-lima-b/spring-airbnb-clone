@@ -31,6 +31,7 @@ public interface AirbnbService {
 	Iterable<Reserve> findAllReserves() throws DataAccessException;
 	void saveReserve(Reserve reserve) throws DataAccessException;
 	void deleteReserve(Reserve reserve) throws DataAccessException;
+	Iterable<Reserve> findAllReservesByGuest(String guest) throws DataAccessException;
 	
 
 }

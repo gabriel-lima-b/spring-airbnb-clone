@@ -43,6 +43,14 @@ public class ReserveController {
 		}
 		return new ResponseEntity<Collection<Reserve>>(reserves, HttpStatus.OK);
 	}
+	@RequestMapping(value = "guest/{guestId}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Collection<Reserve>> getReservesByGuest(@PathVariable("guestId") String guestId) {
+		List<Reserve> reserves = (List<Reserve>) this.airbnbService.findAllReservesByGuest(guestId);
+		if (reserves.isEmpty()) {
+			return new ResponseEntity<Collection<Reserve>>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Collection<Reserve>>(reserves, HttpStatus.OK);
+	}
 	
 	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
 	public ResponseEntity<Reserve> save(@RequestBody Reserve reserve, BindingResult bindingResult) {

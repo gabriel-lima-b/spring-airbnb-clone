@@ -38,25 +38,29 @@ public class JacksonCustomGuestSerializer extends StdSerializer<Guest> {
 		jgen.writeStringField("password" , guest.getPassword());
 		jgen.writeStringField("phone" , guest.getPhone());
 		//write rooms array
-		jgen.writeArrayFieldStart("reserves");
-		for (Reserve reserve : guest.getReserves()) {
-			jgen.writeStartObject(); // reserve
-			if (reserve.getId() == null) {
-				jgen.writeNullField("id");
-			} else {
-				jgen.writeStringField("id", reserve.getId().toString());
-			}
-			jgen.writeStringField( "checkIn", formatter.format(reserve.getCheckIn()));
-			jgen.writeStringField( "checkOut", formatter.format(reserve.getCheckOut()));
-			
-			if (reserve.getRoom().getId() == null) {
-				jgen.writeNullField("room");
-			}else {
-				jgen.writeStringField("room", reserve.getRoom().getId().toString());
-			}
-			jgen.writeEndObject(); // reserve
-		}
-		jgen.writeEndArray(); // reserves
+//		jgen.writeArrayFieldStart("reserves");
+//		for (Reserve reserve : guest.getReserves()) {
+//			jgen.writeStartObject(); // reserve
+//			if (reserve.getId() == null) {
+//				jgen.writeNullField("id");
+//			} else {
+//				jgen.writeStringField("id", reserve.getId().toString());
+//			}
+//			jgen.writeStringField( "checkIn", formatter.format(reserve.getCheckIn()));
+//			jgen.writeStringField( "checkOut", formatter.format(reserve.getCheckOut()));
+//			
+//			jgen.writeObjectFieldStart("room"); // start room
+//			if (reserve.getRoom().getId() == null) {
+//				jgen.writeNullField("id");
+//			} else {
+//				jgen.writeStringField("id", reserve.getRoom().getId().toString());
+//				jgen.writeStringField("title",reserve.getRoom().getTitle());
+//				jgen.writeNumberField("price", reserve.getRoom().getPrice());
+//			}
+//			jgen.writeEndObject(); // end room
+//			jgen.writeEndObject(); // reserve
+//		}
+//		jgen.writeEndArray(); // reserves
 		jgen.writeEndObject(); // guest
 	}
 

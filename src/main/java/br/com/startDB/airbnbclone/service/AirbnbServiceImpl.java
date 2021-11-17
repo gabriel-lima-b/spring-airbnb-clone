@@ -1,10 +1,11 @@
 package br.com.startDB.airbnbclone.service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.transaction.annotation.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -91,7 +92,7 @@ public class AirbnbServiceImpl implements AirbnbService {
 		}
 		return room.get();
 	}
-	
+
 	@Override
 	public Iterable<Room> findAllRoomsByCity(String city) throws DataAccessException {
 		return roomRepository.findAllByCity(city);
@@ -134,7 +135,20 @@ public class AirbnbServiceImpl implements AirbnbService {
 
 	@Override
 	public void deleteReserve(Reserve reserve) throws DataAccessException {
-		reserveRepository.delete(reserve);		
+		reserveRepository.delete(reserve);
 	}
 
+	@Override
+	//TODO refazer esse metodo ou pensar em algo diferente
+	public Iterable<Reserve> findAllReservesByGuest(String guest) throws DataAccessException {
+		ArrayList<Reserve> filtered = new ArrayList<Reserve>();
+		Iterable<Reserve> all = reserveRepository.findAll();
+
+		for (Reserve reserve : all) {
+			if (reserve.getGuest().getId().compareTo(UUID.fromString(guest)) == 0) {
+				filtered.add(reserve);
+			}
+		}
+		return filtered;
+	}
 }
