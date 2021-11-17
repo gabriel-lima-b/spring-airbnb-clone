@@ -1,7 +1,6 @@
 package br.com.startDB.airbnbclone.service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Optional;
 import java.util.UUID;
 

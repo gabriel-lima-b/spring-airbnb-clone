@@ -12,7 +12,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 
 import br.com.startDB.airbnbclone.model.Host;
-//import br.com.startDB.airbnbclone.model.Host;
 import br.com.startDB.airbnbclone.model.Room;
 
 public class JacksonCustomRoomDeserializer extends StdDeserializer<Room>{

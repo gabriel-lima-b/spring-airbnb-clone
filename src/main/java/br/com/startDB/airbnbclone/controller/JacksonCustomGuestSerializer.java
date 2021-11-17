@@ -10,7 +10,6 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 import br.com.startDB.airbnbclone.model.Guest;
-import br.com.startDB.airbnbclone.model.Reserve;
 
 public class JacksonCustomGuestSerializer extends StdSerializer<Guest> {
 
