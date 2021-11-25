@@ -58,9 +58,7 @@ public class RoomController {
 		if (bindingResult.hasErrors() || (room == null)) {
 			return new ResponseEntity<Room>(room, HttpStatus.BAD_REQUEST);
 		}
-	
-		airbnbService.saveRoom(room);
-		return new ResponseEntity<Room>(room, HttpStatus.CREATED);
+		return new ResponseEntity<Room>(airbnbService.saveRoom(room), HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "/{roomId}", method = RequestMethod.DELETE, produces = "application/json")
@@ -79,17 +77,13 @@ public class RoomController {
 		if(bindingResult.hasErrors() || (room == null)){
 			return new ResponseEntity<Room>(room, HttpStatus.BAD_REQUEST);
 		}
-		Room currentRoom = this.airbnbService.findRoomById(roomId);
+		Room currentRoom = this.airbnbService.updateRoom(roomId, room);
+		
 		if(currentRoom == null){
 			return new ResponseEntity<Room>(HttpStatus.NOT_FOUND);
-		}
-		currentRoom.setTitle(room.getTitle());
-		currentRoom.setDescription(room.getDescription());
-		currentRoom.setCity(room.getCity());
-		currentRoom.setPrice(room.getPrice());
-				
-		this.airbnbService.saveRoom(currentRoom);
-		return new ResponseEntity<Room>(currentRoom, HttpStatus.NO_CONTENT);
+		}				
+		
+		return new ResponseEntity<Room>(this.airbnbService.saveRoom(currentRoom), HttpStatus.OK);
 	}
 
 }

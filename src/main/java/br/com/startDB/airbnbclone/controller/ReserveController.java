@@ -57,8 +57,7 @@ public class ReserveController {
 		if(bindingResult.hasErrors() || (reserve == null)){
 			return new ResponseEntity<Reserve>(reserve, HttpStatus.BAD_REQUEST);
 		}
-		airbnbService.saveReserve(reserve);
-		return new ResponseEntity<Reserve>(reserve, HttpStatus.CREATED); 
+		return new ResponseEntity<Reserve>(airbnbService.saveReserve(reserve), HttpStatus.CREATED); 
 	}
 	
 	@RequestMapping(value = "/{reserveId}", method = RequestMethod.DELETE, produces = "application/json")
@@ -76,15 +75,12 @@ public class ReserveController {
 		if(bindingResult.hasErrors() || (reserve == null)){
 			return new ResponseEntity<Reserve>(reserve, HttpStatus.BAD_REQUEST);
 		}
-		Reserve currentReserve = this.airbnbService.findReserveById(reserveId);
+		Reserve currentReserve = this.airbnbService.updateReserve(reserveId, reserve);
 		if(currentReserve == null){
 			return new ResponseEntity<Reserve>(HttpStatus.NOT_FOUND);
 		}
-		currentReserve.setCheckIn(reserve.getCheckIn());
-		currentReserve.setCheckOut(reserve.getCheckOut());		
-		
-		this.airbnbService.saveReserve(currentReserve);
-		return new ResponseEntity<Reserve>(currentReserve, HttpStatus.NO_CONTENT);
+
+		return new ResponseEntity<Reserve>(currentReserve, HttpStatus.OK);
 	}
 	
 

@@ -7,6 +7,8 @@ import java.util.UUID;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.com.startDB.airbnbclone.model.Guest;
@@ -50,10 +52,28 @@ public class AirbnbServiceImpl implements AirbnbService {
 	}
 
 	@Override
-	public void saveGuest(Guest guest) throws DataAccessException {
-		guestRepository.save(guest);
+	public Guest saveGuest(Guest guest) throws DataAccessException {
+		return guestRepository.save(guest);
 	}
 
+	@Override
+	public Guest updateGuest(UUID guestId, Guest guest) throws DataAccessException {
+		Guest currentGuest = this.findGuestById(guestId);
+		
+		if(currentGuest == null){
+			return null;
+		}
+		
+		currentGuest.setName(guest.getName());
+		currentGuest.setLastName(guest.getLastName());
+		currentGuest.setEmail(guest.getEmail());
+		currentGuest.setPassword(guest.getPassword());
+		currentGuest.setPhone(guest.getPhone());
+		
+		return guestRepository.save(currentGuest);
+	}
+	
+	
 	@Override
 	public void deleteGuest(Guest guest) throws DataAccessException {
 		guestRepository.delete(guest);
@@ -74,8 +94,25 @@ public class AirbnbServiceImpl implements AirbnbService {
 	}
 
 	@Override
-	public void saveHost(Host host) throws DataAccessException {
-		hostRepository.save(host);
+	public Host saveHost(Host host) throws DataAccessException {
+		return hostRepository.save(host);
+	}
+	
+	@Override
+	public Host updateHost(UUID hostId, Host host) throws DataAccessException {
+		Host currentHost = this.findHostById(hostId);
+		
+		if(currentHost == null){
+			return null;
+		}
+		
+		currentHost.setName(host.getName());
+		currentHost.setLastName(host.getLastName());
+		currentHost.setEmail(host.getEmail());
+		currentHost.setPassword(host.getPassword());
+		currentHost.setPhone(host.getPhone());
+		
+		return hostRepository.save(currentHost);
 	}
 
 	@Override
@@ -105,8 +142,24 @@ public class AirbnbServiceImpl implements AirbnbService {
 
 	@Override
 	@Transactional
-	public void saveRoom(Room room) throws DataAccessException {
-		roomRepository.save(room);
+	public Room saveRoom(Room room) throws DataAccessException {
+		return roomRepository.save(room);
+	}
+	
+	@Override
+	public Room updateRoom(UUID roomId, Room room) throws DataAccessException {
+		Room currentRoom = this.findRoomById(roomId);
+		
+		if(currentRoom == null){
+			return null;
+		}
+		
+		currentRoom.setTitle(room.getTitle());
+		currentRoom.setDescription(room.getDescription());
+		currentRoom.setCity(room.getCity());
+		currentRoom.setPrice(room.getPrice());
+		
+		return roomRepository.save(currentRoom);
 	}
 
 	@Override
@@ -114,9 +167,6 @@ public class AirbnbServiceImpl implements AirbnbService {
 		roomRepository.delete(room);
 	}
 
-	
-	
-	
 	@Override
 	public Reserve findReserveById(UUID id) throws DataAccessException {
 		Optional<Reserve> reserve = reserveRepository.findById(id);
@@ -132,9 +182,25 @@ public class AirbnbServiceImpl implements AirbnbService {
 	}
 
 	@Override
-	public void saveReserve(Reserve reserve) throws DataAccessException {
-		reserveRepository.save(reserve);
+	public Reserve saveReserve(Reserve reserve) throws DataAccessException {
+		return reserveRepository.save(reserve);
 	}
+	
+	@Override
+	public Reserve updateReserve(UUID reserveId, Reserve reserve) throws DataAccessException {
+		Reserve currentReserve = this.findReserveById(reserveId);
+		
+		if(currentReserve == null){
+			return null;
+		}
+		
+		currentReserve.setCheckIn(reserve.getCheckIn());
+		currentReserve.setCheckOut(reserve.getCheckOut());
+		
+		return reserveRepository.save(currentReserve);
+	}
+
+
 
 	@Override
 	public void deleteReserve(Reserve reserve) throws DataAccessException {
@@ -142,18 +208,14 @@ public class AirbnbServiceImpl implements AirbnbService {
 	}
 
 	@Override
-	//TODO refazer esse metodo ou pensar em algo diferente
 	public Iterable<Reserve> findAllReservesByGuest(String guest) throws DataAccessException {
-		ArrayList<Reserve> filtered = new ArrayList<Reserve>();
-		Iterable<Reserve> all = reserveRepository.findAll();
-
-		for (Reserve reserve : all) {
-			if (reserve.getGuest().getId().compareTo(UUID.fromString(guest)) == 0) {
-				filtered.add(reserve);
-			}
-		}
-		return filtered;
+		
+		UUID id = UUID.fromString(guest);
+		
+		return reserveRepository.findAllByGuestId(id);
 	}
+
+	
 
 
 }

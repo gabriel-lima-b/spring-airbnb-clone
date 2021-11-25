@@ -53,8 +53,7 @@ public class GuestController {
 		if(bindingResult.hasErrors() || (guest == null)){
 			return new ResponseEntity<Guest>(guest, HttpStatus.BAD_REQUEST);
 		}
-		airbnbService.saveGuest(guest);
-		return new ResponseEntity<Guest>(guest, HttpStatus.CREATED); 
+		return new ResponseEntity<Guest>(airbnbService.saveGuest(guest), HttpStatus.CREATED); 
 	}
 	
 	@RequestMapping(value = "/{guestId}", method = RequestMethod.DELETE, produces = "application/json")
@@ -72,18 +71,13 @@ public class GuestController {
 		if(bindingResult.hasErrors() || (guest == null)){
 			return new ResponseEntity<Guest>(guest, HttpStatus.BAD_REQUEST);
 		}
-		Guest currentGuest = this.airbnbService.findGuestById(guestId);
-		if(currentGuest == null){
+		Guest updatedGuest = this.airbnbService.updateGuest(guestId, guest);
+				
+		if(updatedGuest == null){
 			return new ResponseEntity<Guest>(HttpStatus.NOT_FOUND);
 		}
-		currentGuest.setName(guest.getName());
-		currentGuest.setLastName(guest.getLastName());
-		currentGuest.setEmail(guest.getEmail());
-		currentGuest.setPassword(guest.getPassword());
-		currentGuest.setPhone(guest.getPhone());
 		
-		this.airbnbService.saveGuest(currentGuest);
-		return new ResponseEntity<Guest>(currentGuest, HttpStatus.NO_CONTENT);
+		return new ResponseEntity<Guest>(updatedGuest, HttpStatus.OK);
 	}
 	
 

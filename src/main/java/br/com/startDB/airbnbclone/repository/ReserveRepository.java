@@ -8,6 +8,6 @@ import br.com.startDB.airbnbclone.model.Reserve;
 
 public interface ReserveRepository extends CrudRepository<Reserve, UUID> {
 
-	Iterable<Reserve> findAllReservesByGuest(String guest);
+	Iterable<Reserve> findAllByGuestId(UUID guestId);
 
 }
