@@ -93,9 +93,10 @@ public class AirbnbServiceImpl implements AirbnbService {
 	}
 
 	@Override
-	public Iterable<Room> findAllRoomsByCity(String city) throws DataAccessException {
-		return roomRepository.findAllByCity(city);
+	public Iterable<Room> findAllByCityLikeIgnoreCase(String city) throws DataAccessException {
+		return 	roomRepository.findAllByCityLikeIgnoreCase(city);
 	}
+	
 
 	@Override
 	public Iterable<Room> findAllRooms() throws DataAccessException {
@@ -113,6 +114,9 @@ public class AirbnbServiceImpl implements AirbnbService {
 		roomRepository.delete(room);
 	}
 
+	
+	
+	
 	@Override
 	public Reserve findReserveById(UUID id) throws DataAccessException {
 		Optional<Reserve> reserve = reserveRepository.findById(id);
@@ -150,4 +154,6 @@ public class AirbnbServiceImpl implements AirbnbService {
 		}
 		return filtered;
 	}
+
+
 }

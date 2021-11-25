@@ -22,10 +22,10 @@ public interface AirbnbService {
 	void deleteHost(Host host) throws DataAccessException;
 
 	Room findRoomById(UUID id) throws DataAccessException;
-	Iterable<Room> findAllRoomsByCity(String city) throws DataAccessException;
+	Iterable<Room> findAllByCityLikeIgnoreCase(String city) throws DataAccessException;	
 	Iterable<Room> findAllRooms() throws DataAccessException;
 	void saveRoom(Room room) throws DataAccessException;
-	void deleteRoom(Room room) throws DataAccessException;	
+	void deleteRoom(Room room) throws DataAccessException;
 	
 	Reserve findReserveById(UUID id) throws DataAccessException;
 	Iterable<Reserve> findAllReserves() throws DataAccessException;
