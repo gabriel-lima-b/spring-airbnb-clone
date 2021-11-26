@@ -165,11 +165,20 @@ class RoomControllerTests {
     }
 
     @Test
-    public void testCreateRoomError() throws Exception {
+    public void testCreateRoomErrorTitleEqualsNullAndIdEqualsNull() throws Exception {
+    	Room newRoom = rooms.get(0);
+    	newRoom.setId(null);
+    	newRoom.setTitle(null);
+    	ObjectMapper mapper = new ObjectMapper();
+    	String newRoomAsJSON = mapper.writeValueAsString(newRoom);
+    	this.mockMvc.perform(post("/api/rooms/")
+        		.content(newRoomAsJSON).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE))
+        		.andExpect(status().isBadRequest()).andDo(MockMvcResultHandlers.print());
+     }
+    
+    @Test
+    public void testCreateRoomErrorRoomIsNull() throws Exception {
     	Room newRoom = null;
-//    	newRoom.setId(null);
-//    	newRoom.setTitle(null);
-    	//TODO:RESOLVER A TRETA
     	ObjectMapper mapper = new ObjectMapper();
     	String newRoomAsJSON = mapper.writeValueAsString(newRoom);
     	this.mockMvc.perform(post("/api/rooms/")
@@ -177,6 +186,7 @@ class RoomControllerTests {
         		.andExpect(status().isBadRequest()).andDo(MockMvcResultHandlers.print());
      }
 
+//TODO: (DÚVIDA) ele está retornando um status diferente pois dentro do update esta retornando um objeto null
 //    @Test
 //    public void testUpdateRoomSuccess() throws Exception {
 //    	given(this.airbnbService.findRoomById(UUID.fromString("1ffd0c84-920c-49e4-9ff3-262fd95741cf"))).willReturn(rooms.get(0));
@@ -185,13 +195,13 @@ class RoomControllerTests {
 //    	newRoom.setDescription("Verde");
 //    	newRoom.setCity("Agudo");
 //    	newRoom.setPrice(new BigDecimal("500"));
-//    	//newRoom.setHost(new Host());
+//    	
 //    	ObjectMapper mapper = new ObjectMapper();
 //    	String newRoomAsJSON = mapper.writeValueAsString(newRoom);
-//    	this.mockMvc.perform(put("/api/rooms/1ffd0c84-920c-49e4-9ff3-262fd95741cf")
+//    	this.mockMvc.perform(put("/api/rooms/"+rooms.get(0).getId())
 //    		.content(newRoomAsJSON).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE))
-//        	.andExpect(content().contentType("application/json"))
-//        	.andExpect(status().isNoContent());
+//        	.andExpect(status().isOk())
+//        	.andExpect(content().contentType("application/json"));
 //
 //    	this.mockMvc.perform(get("/api/rooms/1ffd0c84-920c-49e4-9ff3-262fd95741cf")
 //           	.accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -202,20 +212,51 @@ class RoomControllerTests {
 //            .andExpect(jsonPath("$.description").value("Verde"))
 //            .andExpect(jsonPath("$.city").value("Agudo"))
 //            .andExpect(jsonPath("$.price").value("500"));
-//      //      .andExpect(jsonPath("$.host").value(host));
-//    	//TODO: ARRUMA AI GABRIEL
+//           // .andExpect(jsonPath("$.host").value(host));
+//    	
 //    }
     
-//    @Test
-//   
-//    public void testUpdateRoomError() throws Exception {
-//    	Room newRoom = rooms.get(0);
-//    	newRoom.setTitle("");
-//    	ObjectMapper mapper = new ObjectMapper();
-//    	String newRoomAsJSON = mapper.writeValueAsString(newRoom);
-//    	this.mockMvc.perform(put("/api/rooms/1ffd0c84-920c-49e4-9ff3-262fd95741cf")
-//    		.content(newRoomAsJSON).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE))
-//        	.andExpect(status().isBadRequest());
-//     }
-//    
+    @Test
+    public void testUpdateRoomErrorTitleEqualsNull() throws Exception {
+    	Room newRoom = rooms.get(0);
+    	newRoom.setTitle(null);
+    	ObjectMapper mapper = new ObjectMapper();
+    	String newRoomAsJSON = mapper.writeValueAsString(newRoom);
+    	this.mockMvc.perform(put("/api/rooms/1ffd0c84-920c-49e4-9ff3-262fd95741cf")
+    		.content(newRoomAsJSON).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE))
+        	.andExpect(status().isBadRequest());
+     }
+    
+    @Test
+    public void testUpdateRoomErrorRoomIsNull() throws Exception {
+    	Room newRoom = null;
+    	ObjectMapper mapper = new ObjectMapper();
+    	String newRoomAsJSON = mapper.writeValueAsString(newRoom);
+    	this.mockMvc.perform(put("/api/rooms/1ffd0c84-920c-49e4-9ff3-262fd95741cf")
+    		.content(newRoomAsJSON).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE))
+        	.andExpect(status().isBadRequest());
+     }
+    
+    @Test
+    public void testDeleteRoomSuccess() throws Exception {
+    	Room newRoom = rooms.get(0);
+    	ObjectMapper mapper = new ObjectMapper();
+    	String newRoomAsJSON = mapper.writeValueAsString(newRoom);
+    	given(this.airbnbService.findRoomById(UUID.fromString("1ffd0c84-920c-49e4-9ff3-262fd95741cf"))).willReturn(rooms.get(0));
+    	this.mockMvc.perform(delete("/api/rooms/1ffd0c84-920c-49e4-9ff3-262fd95741cf")
+    		.content(newRoomAsJSON).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE))
+        	.andExpect(status().isOk());
+    }
+
+    @Test
+    public void testDeleteRoomErrorInvalidId() throws Exception {
+    	Room newRoom = rooms.get(0);
+    	ObjectMapper mapper = new ObjectMapper();
+    	String newRoomAsJSON = mapper.writeValueAsString(newRoom);
+    	given(this.airbnbService.findRoomById(UUID.fromString("9aedab49-af59-4494-903d-fe869e38b89a"))).willReturn(null);
+    	this.mockMvc.perform(delete("/api/rooms/9aedab49-af59-4494-903d-fe869e38b89a")
+    		.content(newRoomAsJSON).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE))
+        	.andExpect(status().isNotFound());
+    }
+    
 }

@@ -54,9 +54,9 @@ public class RoomController {
 		return new ResponseEntity<Collection<Room>>(rooms, HttpStatus.OK);
 	}
 
-	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
 	public ResponseEntity<Room> save(@RequestBody Room room, BindingResult bindingResult) {
-		if (bindingResult.hasErrors() || (room == null)) {
+		if (bindingResult.hasErrors() || (room == null) || (room.getId() == null) || (room.getTitle() == null)) {
 			return new ResponseEntity<Room>(room, HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<Room>(airbnbService.saveRoom(room), HttpStatus.CREATED);
@@ -75,7 +75,7 @@ public class RoomController {
 	
 	@RequestMapping(value = "/{roomId}", method = RequestMethod.PUT, produces = "application/json")
 	public ResponseEntity<Room> updateRoom(@PathVariable("roomId") UUID roomId, @RequestBody Room room, BindingResult bindingResult){
-		if(bindingResult.hasErrors() || (room == null)){
+		if(bindingResult.hasErrors() || (room == null) || (room.getTitle() == null)){
 			return new ResponseEntity<Room>(room, HttpStatus.BAD_REQUEST);
 		}
 		Room currentRoom = this.airbnbService.updateRoom(roomId, room);
