@@ -29,6 +29,7 @@ public class RoomController {
 	@RequestMapping(value = "/{roomId}", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<Room> getRoom(@PathVariable("roomId") UUID roomId) {
 		Room room = this.airbnbService.findRoomById(roomId);
+		System.out.println(room);
 		if (room == null) {
 			return new ResponseEntity<Room>(HttpStatus.NOT_FOUND);
 		}

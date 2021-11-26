@@ -22,8 +22,7 @@ import br.com.startDB.airbnbclone.controller.JacksonCustomHostSerializer;
 public class Host extends User{
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "host", fetch = FetchType.EAGER)
-    private Set<Room> rooms;
-	
+    private Set<Room> rooms;	
 	
 	public Host() {
 		super();
@@ -49,6 +48,5 @@ public class Host extends User{
 	
 	public boolean removeRoom (Room room) {
 		return this.rooms.remove(room);
-	}
-	
+	}	
 }
