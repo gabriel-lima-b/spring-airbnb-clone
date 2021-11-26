@@ -47,6 +47,11 @@ public class AirbnbServiceImpl implements AirbnbService {
 	}
 
 	@Override
+	public Guest findGuestByEmailIgnoreCase(String email) throws DataAccessException {
+		return guestRepository.findByEmailIgnoreCase(email);
+	}
+	
+	@Override
 	public Iterable<Guest> findAllGuests() throws DataAccessException {
 		return guestRepository.findAll();
 	}
@@ -215,6 +220,7 @@ public class AirbnbServiceImpl implements AirbnbService {
 		return reserveRepository.findAllByGuestId(id);
 	}
 
+	
 	
 
 

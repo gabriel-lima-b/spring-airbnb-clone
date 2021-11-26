@@ -38,7 +38,7 @@ public class GuestController {
 		}
 		return new ResponseEntity<Guest>(guest, HttpStatus.OK);
 	}
-	
+		
 	@RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<Collection<Guest>> getGuests(){
 		List<Guest> guests = (List<Guest>) this.airbnbService.findAllGuests();
@@ -47,6 +47,15 @@ public class GuestController {
 		}
 		return new ResponseEntity<Collection<Guest>>(guests, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/email/{email}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Guest> getGuestByEmail(@PathVariable("email") String email){
+		Guest guest = this.airbnbService.findGuestByEmailIgnoreCase(email);
+		if(guest == null){
+			return new ResponseEntity<Guest>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Guest>(guest, HttpStatus.OK);
+	}	
 	
 	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
 	public ResponseEntity<Guest> save(@RequestBody Guest guest, BindingResult bindingResult) {

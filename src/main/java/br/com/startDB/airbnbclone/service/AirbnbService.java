@@ -12,6 +12,7 @@ import br.com.startDB.airbnbclone.model.Room;
 public interface AirbnbService {
 
 	Guest findGuestById(UUID id) throws DataAccessException;
+	Guest findGuestByEmailIgnoreCase(String email) throws DataAccessException;
 	Iterable<Guest> findAllGuests() throws DataAccessException;
 	Guest saveGuest(Guest guest) throws DataAccessException;
 	Guest updateGuest(UUID guestId, Guest guest) throws DataAccessException;
