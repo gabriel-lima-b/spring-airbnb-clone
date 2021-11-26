@@ -19,6 +19,7 @@ public interface AirbnbService {
 	void deleteGuest(Guest guest) throws DataAccessException;
 	
 	Host findHostById(UUID id) throws DataAccessException;
+	Host findHostByEmailIgnoreCase(String email) throws DataAccessException;
 	Iterable<Host> findAllHosts() throws DataAccessException;
 	Host saveHost(Host host) throws DataAccessException;
 	Host updateHost(UUID hostId, Host host) throws DataAccessException;

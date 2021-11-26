@@ -44,12 +44,20 @@ public class HostController {
 		return new ResponseEntity<Collection<Host>>(hosts, HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/email/{email}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Host> getHostByEmailIgnoreCase(@PathVariable("email") String email){
+		Host host = this.airbnbService.findHostByEmailIgnoreCase(email);
+		if(host == null){
+			return new ResponseEntity<Host>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Host>(host, HttpStatus.OK);
+	}
+	
 	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
 	public ResponseEntity<Host> save(@RequestBody Host host, BindingResult bindingResult) {
 		if(bindingResult.hasErrors() || (host == null)){
 			return new ResponseEntity<Host>(host, HttpStatus.BAD_REQUEST);
-		}
-		
+		}		
 		return new ResponseEntity<Host>(airbnbService.saveHost(host), HttpStatus.CREATED); 
 	}
 	

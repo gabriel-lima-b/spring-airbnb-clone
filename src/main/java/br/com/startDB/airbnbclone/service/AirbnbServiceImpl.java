@@ -92,6 +92,12 @@ public class AirbnbServiceImpl implements AirbnbService {
 		}
 		return host.get();
 	}
+	
+	@Override
+	public Host findHostByEmailIgnoreCase(String email) throws DataAccessException {
+		return hostRepository.findHostByEmailIgnoreCase(email);
+	}
+
 
 	@Override
 	public Iterable<Host> findAllHosts() throws DataAccessException {
@@ -220,6 +226,7 @@ public class AirbnbServiceImpl implements AirbnbService {
 		return reserveRepository.findAllByGuestId(id);
 	}
 
+	
 	
 	
 

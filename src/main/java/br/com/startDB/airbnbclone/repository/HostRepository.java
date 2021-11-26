@@ -5,5 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 import br.com.startDB.airbnbclone.model.Host;
 
 public interface HostRepository extends CrudRepository<Host, UUID> {
-
+	
+	Host findHostByEmailIgnoreCase (String email);
 }
