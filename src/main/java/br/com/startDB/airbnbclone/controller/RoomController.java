@@ -56,7 +56,7 @@ public class RoomController {
 
 	@RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
 	public ResponseEntity<Room> save(@RequestBody Room room, BindingResult bindingResult) {
-		if (bindingResult.hasErrors() || (room == null) || (room.getId() == null) || (room.getTitle() == null)) {
+		if (bindingResult.hasErrors() || (room == null) ||  (room.getTitle() == null)) {
 			return new ResponseEntity<Room>(room, HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<Room>(airbnbService.saveRoom(room), HttpStatus.CREATED);
