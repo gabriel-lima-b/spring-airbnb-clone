@@ -43,7 +43,7 @@ public class AirbnbcloneApplication {
         
             //ROOMS
             
-            Room r1 = new Room( "Kaer Morhen", "an old keep where witchers of the School of the Wolf used to be trained.", h1, new BigDecimal("180"), "Barra Bonita");
+            Room r1 = new Room( "Kaer Morhen", "An old keep where witchers of the School of the Wolf used to be trained.", h1, new BigDecimal("180"), "Barra Bonita");
             airbnbService.saveRoom(r1);
         
             Room r2 = new Room( "Passiflora", "Passiflora is considered the finest tavern in all of Novigrad, which is significant as there are a total of twelve within the city.", h4, new BigDecimal("120"), "Porto Alegre");

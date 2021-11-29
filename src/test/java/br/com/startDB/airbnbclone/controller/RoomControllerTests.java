@@ -114,7 +114,7 @@ class RoomControllerTests {
     }
     
     @Test
-    public void testGetAllPetsSuccess() throws Exception {
+    public void testGetAllRoomsSuccess() throws Exception {
     	given(this.airbnbService.findAllRooms()).willReturn(rooms);
         this.mockMvc.perform(get("/api/rooms/")
         	.accept(MediaType.APPLICATION_JSON))

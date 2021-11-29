@@ -54,7 +54,7 @@ public class ReserveController {
 	
 	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
 	public ResponseEntity<Reserve> save(@RequestBody Reserve reserve, BindingResult bindingResult) {
-		if(bindingResult.hasErrors() || (reserve == null)){
+		if(bindingResult.hasErrors() || (reserve == null) || (reserve.getCheckIn() == null)){
 			return new ResponseEntity<Reserve>(reserve, HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<Reserve>(airbnbService.saveReserve(reserve), HttpStatus.CREATED); 
@@ -72,7 +72,7 @@ public class ReserveController {
 	
 	@RequestMapping(value = "/{reserveId}", method = RequestMethod.PUT, produces = "application/json")
 	public ResponseEntity<Reserve> updateReserve(@PathVariable("reserveId") UUID reserveId, @RequestBody Reserve reserve, BindingResult bindingResult){
-		if(bindingResult.hasErrors() || (reserve == null)){
+		if(bindingResult.hasErrors() || (reserve == null) || (reserve.getCheckIn() == null)){
 			return new ResponseEntity<Reserve>(reserve, HttpStatus.BAD_REQUEST);
 		}
 		Reserve currentReserve = this.airbnbService.updateReserve(reserveId, reserve);

@@ -55,7 +55,7 @@ public class HostController {
 	
 	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
 	public ResponseEntity<Host> save(@RequestBody Host host, BindingResult bindingResult) {
-		if(bindingResult.hasErrors() || (host == null)){
+		if(bindingResult.hasErrors() || (host == null) || (host.getName() == null)){
 			return new ResponseEntity<Host>(host, HttpStatus.BAD_REQUEST);
 		}		
 		return new ResponseEntity<Host>(airbnbService.saveHost(host), HttpStatus.CREATED); 
@@ -73,7 +73,7 @@ public class HostController {
 	
 	@RequestMapping(value = "/{hostId}", method = RequestMethod.PUT, produces = "application/json")
 	public ResponseEntity<Host> updateHost(@PathVariable("hostId") UUID hostId, @RequestBody Host host, BindingResult bindingResult){
-		if(bindingResult.hasErrors() || (host == null)){
+		if(bindingResult.hasErrors() || (host == null) || (host.getName() == null)){
 			return new ResponseEntity<Host>(host, HttpStatus.BAD_REQUEST);
 		}
 		Host currentHost = this.airbnbService.updateHost(hostId, host);
